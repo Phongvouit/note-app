@@ -1,6 +1,11 @@
+import { User } from "@prisma/client";
 import Image from "next/image";
 
-const Avatar = () => {
+interface AvatarProps {
+  user: User
+}
+
+const Avatar: React.FC<AvatarProps> = ({user}) => {
   return (
     <div
       className="
@@ -12,7 +17,7 @@ const Avatar = () => {
         w-9
         "
     >
-      <Image alt="Avatar" src="/images/profile.png" fill/>
+      <Image alt="Avatar" src={user?.image || "/images/profile.png"} fill/>
     </div>
   );
 };

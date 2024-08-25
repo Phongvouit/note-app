@@ -1,12 +1,14 @@
 import Image from "next/image";
 import UserMenu from "../components/UserMenu";
 import FolderList from "../components/FolderList";
+import getCurrentUser from "../actions/getCurrentUser";
 
 export default async function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const currentUser = await getCurrentUser()
   return (
     <div className="h-screen">
       <div className="w-full py-8 text-center">
@@ -20,7 +22,7 @@ export default async function HomeLayout({
       </div>
 
       <div className="container mx-auto px-8">
-        <UserMenu />
+        <UserMenu currentUser={currentUser!}/>
         <div className="w-full flex shadow-md rounded-md py-4">
           <div className="w-3/12">
             <FolderList />
