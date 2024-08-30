@@ -7,13 +7,14 @@ import useFolder from "@/app/hooks/useFolder";
 import toast from "react-hot-toast";
 import { Note } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface NoteListProps {
   notes: Note[];
 }
 
 const NoteList: React.FC<NoteListProps> = ({notes}) => {
-  const folderId = useFolder();
+  const {folderId, noteId} = useFolder();
   const router = useRouter();
 
   const handleAddNote = () => {
@@ -30,6 +31,15 @@ const NoteList: React.FC<NoteListProps> = ({notes}) => {
       });
   };
 
+  useEffect(() => {
+    if(noteId) {
+      return
+    }
+    if(notes?.[0]) {
+      router.push(`${folderId}/note/${notes?.[0].id}`)
+    }
+  },[notes, folderId, noteId, router])
+
   return (
     <div className="w-full h-full bg-[#F0EBE3] p-4">
       <div className="mb-2 flex items-center justify-between">
@@ -43,7 +53,7 @@ const NoteList: React.FC<NoteListProps> = ({notes}) => {
       </div>
       <div className="h-[400px] overflow-y-auto scrollbar-hide">
         {notes.map((item) => (
-          <NoteItem key={item.id}/>
+          <NoteItem key={item.id} note={item} selected={noteId === item.id}/>
         ))}
       </div>
     </div>

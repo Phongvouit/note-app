@@ -1,9 +1,15 @@
-import Note from "./components/Note"
+import NoteDetail from "./components/NoteDetail";
+import getNoteById from "@/app/actions/getNoteById";
 
-const noteId = () => {
+interface IParams {
+    noteId: string;
+}
+
+const noteId = async({params}: {params: IParams}) => {
+    const note = await getNoteById(params.noteId)
     return (
         <div>
-            <Note/>
+            <NoteDetail note={note!}/>
         </div>
     )
 }

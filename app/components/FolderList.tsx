@@ -13,7 +13,7 @@ interface FolderListProps {
 
 const FolderList: React.FC<FolderListProps> = ({ folders }) => {
   const folderModal = useFolderModal();
-  const folderId = useFolder();
+  const {folderId} = useFolder();
   return (
     <>
       <FolderModal />

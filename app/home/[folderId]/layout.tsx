@@ -1,7 +1,6 @@
 
 import getNotes from "@/app/actions/getNotes";
 import NoteList from "./components/NoteList";
-import useFolder from "@/app/hooks/useFolder";
 
 interface IParams {
   folderId: string

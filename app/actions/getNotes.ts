@@ -4,7 +4,7 @@ const getNotes = async (folderId: string) => {
   try {
     const notes = await prisma.note.findMany({
       orderBy: {
-        createdAt: "desc",
+        updatedAt: "desc",
       },
       where: {
         folderId: folderId,
